@@ -1,43 +1,25 @@
-import sys
-from PyQt5 import QtWidgets
-from PyQt5.QtGui import QPixmap
+import ctypes
+import os
 
-class Window(QtWidgets.QWidget):
-
-    def __init__(self):
-        super(Window, self).__init__()
-
-        self.init_ui()
-
-    def init_ui(self):
-        error = "Hi, I am a Turkish virus but because of poor technology in my country unfortunately\n" + \
-                "I am not able to harm your computer. Please be so kind to delete one of your important\n" + \
-                "files yourself and then forward me to other users. Many thanks for your cooperation! Best\n" + \
+error = "Hi, I am a Turkish virus but because of poor technology in my country unfortunately " + \
+                "I am not able to harm your computer. Please be so kind to delete one of your important " + \
+                "files yourself and then forward me to other users. Many thanks for your cooperation! Best " + \
                 "regards, Turkish Virus."
-        self.setWindowTitle("Virus Alert!")
-        self.setGeometry(0, 0, 640, 220)
-        qtRectangle = self.frameGeometry()
-        centerPoint = QtWidgets.QDesktopWidget().availableGeometry().center()
-        qtRectangle.moveCenter(centerPoint)
-        self.move(qtRectangle.topLeft())
-        self.error_message = QtWidgets.QLabel(error)
-        self.error_image = QtWidgets.QLabel(self)
-        self.pixmap = QPixmap('Error_Message_Icon.png')
-        self.error_image.setPixmap(self.pixmap.scaled(50, 50))
 
-        layout = QtWidgets.QHBoxLayout()
-        layout.addStretch()
-        layout.addWidget(self.error_image)
-        layout.addWidget(self.error_message)
-        layout.addStretch()
+ctypes.windll.user32.MessageBoxW(0, error, "Virus Error!", 4)
 
-        self.setLayout(layout)
+i = 0
 
-        self.show()
+while i < 32:
 
+    cwd = os.getcwd()
+    path = os.path.join(cwd, "TÜRKLER GELİYOR")
+    os.makedirs(path)
+    os.chdir(path)
 
-app = QtWidgets.QApplication(sys.argv)
+    i += 1
 
-window = Window()
+file = open("TÜRKLER GELDİ.txt", "w", encoding="utf-8")
+file.write("TÜRKLER GİDİYOR")
+file.close()
 
-sys.exit(app.exec_())
